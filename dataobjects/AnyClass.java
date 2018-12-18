@@ -7,11 +7,9 @@ public class AnyClass
     public double pay;
     //default constructor
     public AnyClass(){
-
     }
 
     public AnyClass(int iSeqno){
-        //System.out.println(iSeqno);
         seqNo = iSeqno;
     }
 

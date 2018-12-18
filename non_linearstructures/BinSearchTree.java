@@ -11,35 +11,59 @@ public class BinSearchTree
         root = null;
     }
 
-    public void insertBST (AnyClass newObj){
+    //(a)
+    public void insert (AnyClass newObj){
         BNode newNd = new BNode(newObj);
-        insertBST(root, newNd);
+        root = insertBST(root, newNd);  //creating link between roots (root = parent)
     }
 
-    protected void insertBST (BNode parent, BNode newNode){
-        if (root == null){
+    protected BNode insertBST (BNode parent, BNode newNode){
+        if (parent == null){
             //we are inserting first node in tree
-            root = newNode;
+            parent = newNode;
         }
 
-        else if (newNode.obj.seqNo < parent.obj.seqNo){
-            if (parent.left == null)
-                parent.left = newNode;
-            else
-                insertBST (parent.left, newNode);
+        else if (newNode.obj.getKey().compareTo(parent.obj.getKey())<0){
+            //inserting left of parent node due to having a lesser key than parent
+            parent.left = insertBST (parent.left, newNode);
         }
 
         else {
-            //newNode should be placed on the right hand side of the parent
-            if (parent.right == null)
-            //we can link directly the newNode with parent
-                parent.right = newNode;
-            else
-                insertBST (parent.right, newNode);
+           //inserting right of parent node due to having a lesser key than parent
+            parent.right = insertBST (parent.right, newNode);
         }
+        return parent;
     }
 
-    public void inOrderBST(){
+    //(b)
+    public AnyClass search (String key){
+        AnyClass obj = searchBST(root, key);
+        if (obj != null)
+            return obj;
+        else
+            return null;
+    }
+
+    protected AnyClass searchBST (BNode currentNode, String pKey){
+        if (currentNode != null){
+            if (pKey == currentNode.obj.getKey()){
+                return currentNode.obj;
+            }
+            else if (pKey.compareTo(currentNode.obj.getKey())<0){
+                //REPEAT for left hand side
+                return searchBST(currentNode.left, pKey);
+            }
+            else{
+                //REPEAT for right hand side
+                return searchBST(currentNode.right, pKey);
+            }
+        }
+        else
+            return null;
+    }
+    
+    //(c)
+    public void listInOrder(){
         inOrderBST(root);
     }
 
@@ -51,27 +75,5 @@ public class BinSearchTree
             currentNode.show();            //displays data of current node
             inOrderBST(currentNode.right); //moves to right node
         }
-    }
-
-    public AnyClass searchSeqNoBST (int keyNum){
-        return searchSeqNoBST (root, keyNum);
-    }
-
-    protected AnyClass searchSeqNoBST (BNode currentNode, int keyNum){
-        if (currentNode != null){
-            if (keyNum == currentNode.obj.seqNo){
-                return currentNode.obj;
-            }
-            else if (keyNum < currentNode.obj.seqNo){
-                //REPEAT for left hand side
-                
-                return searchSeqNoBST(currentNode.left, keyNum);
-            }
-            else{
-                return searchSeqNoBST(currentNode.right, keyNum);
-            }
-        }
-        
-        return null;
     }
 }
