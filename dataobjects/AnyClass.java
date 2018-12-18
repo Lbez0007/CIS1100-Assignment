@@ -1,20 +1,18 @@
 package dataobjects;
-
 import java.util.Scanner;
 
 public class AnyClass
 {
     public int seqNo;
-
+    public double pay;
     //default constructor
     public AnyClass(){
+
     }
 
-    //non-default constructor
     public AnyClass(int iSeqno){
         //System.out.println(iSeqno);
         seqNo = iSeqno;
-
     }
 
     public String getData(){
@@ -29,8 +27,16 @@ public class AnyClass
         seqNo = keyboard.nextInt();
     }
 
+    public int getSeqNo(){
+        return seqNo;
+    }
+
+    public void setSeqNo(int pSeqNo){
+        seqNo = pSeqNo;
+    }
+
     public String getKey(){
-        return "";                     //Actually, we can return whatever we want as String
+        return "";
     }
 
 }
