@@ -14,12 +14,12 @@ public class BNode
         right = null;
     }
     
-    public void show()
+    /*public void show()
     { 
         System.out.println( obj.getData());
     }
     
     public void editNode(){
         obj.edit();
-    }
+    }*/
 }

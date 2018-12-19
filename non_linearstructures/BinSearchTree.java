@@ -2,6 +2,7 @@ package non_linearstructures;
 
 import binarynodes.BNode;
 import dataobjects.AnyClass;
+import linearstructures.*;
 
 public class BinSearchTree
 {
@@ -63,17 +64,26 @@ public class BinSearchTree
     }
     
     //(c)
-    public void listInOrder(){
-        inOrderBST(root);
+    public void listInOrder(){ //listing in ascending order
+        inOrderBST(root);      //for InOrder sorting to start from root/parent of BST
     }
 
     /* This uses the recursion technique to display nodes 
     and moves bi-directionally for each node */
-    protected void inOrderBST(BNode currentNode){
-        if (currentNode != null){
-            inOrderBST(currentNode.left);  //moves to left node
-            currentNode.show();            //displays data of current node
-            inOrderBST(currentNode.right); //moves to right node
+    protected void inOrderBST(BNode parent){   //Inorder = left, then root, then right
+        if (parent != null){ //when null, no data is to be shown, thus moving a step back in the recursive algorithm
+            inOrderBST(parent.left);  //moves to left node
+            parent.obj.getData();     //displays data of current node
+            inOrderBST(parent.right); //moves to right node
+        }
+    }
+    
+    //(d)
+    public void populateFromQueue(CQueue que){
+        
+        while(que.front != que.rear.next){
+            AnyClass obj = que.serve();  //serving from queue and emptying it in the process
+            insert(obj);                 //populating BST from queue
         }
     }
 }
