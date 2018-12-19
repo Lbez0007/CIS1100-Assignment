@@ -13,12 +13,12 @@ public class Node
         next = null;
     }
 
-    public void show()
+    /*public void show()
     { 
         System.out.println( obj.getData());
     }
     
     public void editNode(){
         obj.edit();
-    }
+    }*/
 }
