@@ -4,8 +4,8 @@ public class PartTimer extends Employee      //Inherits from Employee
 {
     public int hours;
     
-    public PartTimer(int iSeqNo, String iSurname, double iPay, int iHours){
-        super(iSeqNo, iSurname, iPay);  //Calling the constructor of PartTimer class
+    public PartTimer(int iSeqNo, String iSurname, double iPay, String iIdNo, int iHours){
+        super(iSeqNo, iSurname, iPay, iIdNo);  //Calling the constructor of PartTimer class
         hours = iHours;
     }
     

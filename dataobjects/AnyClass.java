@@ -1,5 +1,6 @@
 package dataobjects;
 import java.util.Scanner;
+import javax.swing.JOptionPane; 
 
 public class AnyClass
 {
@@ -23,10 +24,7 @@ public class AnyClass
 
     public void edit() 
     {
-        /*System.out.println("Current seqNo is: " + seqNo);
-        System.out.println("Enter the new seqNo: ");
-        Scanner keyboard = new Scanner(System.in);
-        seqNo = keyboard.nextInt();*/
+        
     }
 
     public int getSeqNo(){
@@ -36,6 +34,11 @@ public class AnyClass
     public void setSeqNo(int pSeqNo){
         seqNo = pSeqNo;
     }
-
     
+    public String getID(){
+        return null; 
+    }
+     
+   
+
 }

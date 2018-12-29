@@ -1,8 +1,10 @@
-package linearstructures; 
-
-
-import linearnodes.Node;
+package linearstructures;
 import dataobjects.AnyClass;
+import dataobjects.Employee;
+import dataobjects.PartTimer;
+import linearnodes.*;
+import java.util.Scanner;
+import javax.swing.*; 
 
 public class CQueue{
 
@@ -10,10 +12,10 @@ public class CQueue{
     public Node rear;   //last item in circular queue
     public boolean isFull;  //indicates whether queue is full or not
 
-    public CQueue (int maxNumberOfNodes){
-        for (int i= 0; i<maxNumberOfNodes; i++){
+    public CQueue (int maxNoOfNodes){
+        for (int i= 0; i<maxNoOfNodes; i++){
 
-            Node newNode = new Node (null);  //creating new emptu node
+            Node newNode = new Node (null);  //creating new empty node
 
             if (i == 0){
                 //first node being put in circular queue
@@ -35,7 +37,7 @@ public class CQueue{
     public boolean put(AnyClass newObj){
 
         if (isFull == false){
-            //we can put the item into the circular queue since queue is not yet full
+            //queue is not full 
             rear = rear.next;
             rear.obj = newObj;
 
@@ -43,27 +45,16 @@ public class CQueue{
                 //we just filled in circular queue
                 isFull = true;
             }
+            JOptionPane.showMessageDialog(null, "Success");//(b)
             return true;
         }
 
-        else{
-            //our queue is already full; thus we cannot put item in circular queue
+        else{ 
+            //queue is full
             return false;
         }
     }
-
-    public void traverseQueue(){
-        if (isFull == true || rear.next != front){
-            //Our circular queue contains at least 1 item
-            Node currentNode = front;
-
-            do{
-                currentNode.show();
-                currentNode = currentNode.next;
-            }while (currentNode != rear.next);
-        }
-    }
-
+    //(c) 
     public AnyClass serve(){
         if (isFull == true || rear.next != front){
 
@@ -75,10 +66,80 @@ public class CQueue{
 
             return itemToDelete.obj;
         }
-        
+
         else{
             //circular queue is empty
             return null;
+        }
+    }
+    //(d)
+    public void listAll(){
+        if (isFull == true || rear.next != front){
+            //Our circular queue contains at least 1 item
+            Node currentNode = front;
+
+            do{
+                JOptionPane.showMessageDialog(null, currentNode.obj.getData());
+                currentNode = currentNode.next;
+            }while (currentNode != rear.next);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "The circular queue has no contents"); 
+        }
+    }
+    //(e)
+    boolean completed = false;
+    public AnyClass editObject(int key){
+        Node currentNode = front;
+        AnyClass temp = currentNode.obj;;
+        if (isFull == true || rear.next != front){
+            //Our circular queue contains at least 1 item
+            String tempNewPay = JOptionPane.showInputDialog("Enter new pay: ");
+            int newPay = Integer.parseInt(tempNewPay);
+            currentNode = front;
+            do{
+                temp = currentNode.obj;
+                if(temp instanceof Employee && temp.seqNo == key){
+                    ((Employee)temp).pay = newPay;
+                    completed = true;
+                    break;
+                }
+                else if(temp instanceof PartTimer && temp.seqNo == key){
+                    ((PartTimer)temp).pay = newPay;
+                    completed = true;
+                    break;
+                }
+                else{
+                    completed = false;
+                }
+                currentNode = currentNode.next;
+            }while (currentNode != rear.next||completed==true);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "\nThe circular queue has no contents\n45"); 
+        }
+        return temp;
+    }
+    //(f)
+    public void changePayOfAll(double percent){
+        if (isFull == true || rear.next != front){
+            Node currentNode = front; 
+            do{
+                AnyClass temp = currentNode.obj;
+
+                percent = (double) percent;
+                double percentage = 1+(percent/100);
+                double EmployeePay = ((Employee)temp).pay;
+                double total = EmployeePay*percentage;
+                if(temp instanceof Employee){
+                    ((Employee)temp).pay = total;
+                }
+                else{
+                    ((PartTimer)temp).pay = total;
+                }
+
+                currentNode = currentNode.next;
+            }while (currentNode != rear.next);
         }
     }
 }
