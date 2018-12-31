@@ -45,7 +45,7 @@ public class CQueue{
                 //we just filled in circular queue
                 isFull = true;
             }
-            JOptionPane.showMessageDialog(null, "Success");//(b)
+            
             return true;
         }
 

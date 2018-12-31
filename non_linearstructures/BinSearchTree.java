@@ -3,6 +3,7 @@ package non_linearstructures;
 import binarynodes.BNode;
 import dataobjects.AnyClass;
 import linearstructures.*;
+import javax.swing.JOptionPane; 
 
 public class BinSearchTree
 {
@@ -47,8 +48,8 @@ public class BinSearchTree
 
     protected AnyClass searchBST (BNode currentNode, String pKey){
         if (currentNode != null){
-            if (pKey == currentNode.obj.getKey()){
-                return currentNode.obj;
+            if (pKey.equals(currentNode.obj.getKey())){                
+                return currentNode.obj;                
             }
             else if (pKey.compareTo(currentNode.obj.getKey())<0){
                 //REPEAT for left hand side
@@ -59,8 +60,9 @@ public class BinSearchTree
                 return searchBST(currentNode.right, pKey);
             }
         }
-        else
+        else{
             return null;
+        }
     }
     
     //(c)
@@ -73,7 +75,7 @@ public class BinSearchTree
     protected void inOrderBST(BNode parent){   //Inorder = left, then root, then right
         if (parent != null){ //when null, no data is to be shown, thus moving a step back in the recursive algorithm
             inOrderBST(parent.left);  //moves to left node
-            parent.obj.getData();     //displays data of current node
+            JOptionPane.showMessageDialog(null, parent.obj.getData());    //displays data of current node
             inOrderBST(parent.right); //moves to right node
         }
     }
@@ -81,9 +83,9 @@ public class BinSearchTree
     //(d)
     public void populateFromQueue(CQueue que){
         
-        while(que.front != que.rear.next){
+        do{
             AnyClass obj = que.serve();  //serving from queue and emptying it in the process
             insert(obj);                 //populating BST from queue
-        }
+        }while(que.front != que.rear.next);
     }
 }
