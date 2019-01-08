@@ -17,28 +17,31 @@ public class AnyClass
     public String getData(){
         return "SeqNo: " + seqNo;
     }
-    
+
     public String getKey(){
         return String.valueOf(seqNo);
     }
 
     public void edit() 
     {
-        
+
     }
 
-    public int getSeqNo(){
-        return seqNo;
+    /*public int getSeqNo(){
+    return seqNo;
     }
 
     public void setSeqNo(int pSeqNo){
-        seqNo = pSeqNo;
-    }
-    
+    seqNo = pSeqNo;
+    }*/
+
     public String getID(){
         return null; 
     }
-     
-   
+
+    public double getPay(){
+        return 0;
+    }
+
 
 }

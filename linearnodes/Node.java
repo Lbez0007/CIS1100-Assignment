@@ -2,7 +2,7 @@ package linearnodes;
 
 import dataobjects.*;
 
-public class Node
+public class Node 
 { 
     public AnyClass obj;
     public Node next;

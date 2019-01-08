@@ -14,7 +14,9 @@ public class PartTimer extends Employee      //Inherits from Employee
         //super.getData() calls getData() method of Employee
     }
     
-    public double getSalary(){
+    public double getPay(){
         return pay * hours;          //In the case of part timer, pay is considered as rate/hr
     }
+    
+    //edit(), getID() and getKey() are inherited
 }

@@ -22,12 +22,22 @@ public class MainClass{
         CircularQueue = new CQueue(choice);
         BinSearchTree bst = new BinSearchTree();
 
+        JOptionPane.showMessageDialog(null, "Please enter the details of the director:");
+        String DSeqNo = JOptionPane.showInputDialog("Enter Seq No: ");
+        int dSeqNo = Integer.parseInt(DSeqNo);
+        String DSurn = JOptionPane.showInputDialog("Enter surname: ");
+        String DId = JOptionPane.showInputDialog("Enter ID: ");
+        String DSal = JOptionPane.showInputDialog("Enter Salary: ");
+        double Dsal = Double.parseDouble(DSal);
+        double bonus = 15.0;
+        resultOfPut = CircularQueue.put(new Director(dSeqNo,DId, DSurn, Dsal, bonus));
+        
         do{
             String input = JOptionPane.showInputDialog(
                     "1: Populate Queue with new Employee\n"+ //works
                     "2: Populate Queue with new Part timer\n"+ // works
                     "3: Show all objects in Queue\n"+ //works
-                    "4: Serve the last person added to the queue\n"+ //works
+                    "4: Serve person from queue\n"+ //works
                     "5: Update the pay of a particular person\n"+ // i need to do
                     "6: Update the pay of all persons\n"+ //works
                     "7: Populate Binary Search Tree by all Queue objects\n"+ //works
@@ -70,22 +80,15 @@ public class MainClass{
                 break; 
 
                 case 4:
+
                 CircularQueue.serve();
+
                 break;
 
                 case 5:
                 String surn = JOptionPane.showInputDialog("Enter surname: ");
-                String idNo = JOptionPane.showInputDialog("Enter Id number: ");
-                AnyClass chnResult = bst.search(surn);
-                if (chnResult == null)
-                    JOptionPane.showMessageDialog(null, "Not found");
-                else
-                if (chnResult.getID().equals(idNo))
-                    chnResult.edit();
-                else{
-                    JOptionPane.showMessageDialog(null, "ID doesn't match");
-                    chnResult = bst.search(chnResult.getKey()); 
-                } 
+                CircularQueue.editObject(surn); 
+
                 break;
 
                 case 6:

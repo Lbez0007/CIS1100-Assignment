@@ -45,7 +45,7 @@ public class CQueue{
                 //we just filled in circular queue
                 isFull = true;
             }
-            
+
             return true;
         }
 
@@ -63,7 +63,7 @@ public class CQueue{
 
             front = front.next;  //Logically, this means item is deleted
             isFull = false;
-
+            JOptionPane.showMessageDialog(null, itemToDelete.obj.getData());
             return itemToDelete.obj;
         }
 
@@ -89,29 +89,30 @@ public class CQueue{
     }
     //(e)
     boolean completed = false;
-    public AnyClass editObject(int key){
+    public AnyClass editObject(String key){
         Node currentNode = front;
         AnyClass temp = currentNode.obj;;
         if (isFull == true || rear.next != front){
             //Our circular queue contains at least 1 item
-            String tempNewPay = JOptionPane.showInputDialog("Enter new pay: ");
-            int newPay = Integer.parseInt(tempNewPay);
+            String tIdNo = JOptionPane.showInputDialog("Enter ID number: ");
+
             currentNode = front;
             do{
                 temp = currentNode.obj;
-                if(temp instanceof Employee && temp.seqNo == key){
+
+                if(temp.getKey().equals(key) && temp.getID().equals(tIdNo)){
+                    String tempNewPay = JOptionPane.showInputDialog("Enter new pay: ");
+                    double newPay = Integer.parseInt(tempNewPay);
                     ((Employee)temp).pay = newPay;
                     completed = true;
-                    break;
-                }
-                else if(temp instanceof PartTimer && temp.seqNo == key){
-                    ((PartTimer)temp).pay = newPay;
-                    completed = true;
+                    JOptionPane.showMessageDialog(null, "Success");
                     break;
                 }
                 else{
+                    JOptionPane.showMessageDialog(null, "Person not found");
                     completed = false;
                 }
+
                 currentNode = currentNode.next;
             }while (currentNode != rear.next||completed==true);
         }
@@ -131,11 +132,11 @@ public class CQueue{
                 double percentage = 1+(percent/100);
                 double EmployeePay = ((Employee)temp).pay;
                 double total = EmployeePay*percentage;
-                if(temp instanceof Employee){
-                    ((Employee)temp).pay = total;
+                if(temp instanceof PartTimer){
+                    ((PartTimer)temp).pay = total;
                 }
                 else{
-                    ((PartTimer)temp).pay = total;
+                    ((Employee)temp).pay = total;
                 }
 
                 currentNode = currentNode.next;
